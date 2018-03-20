@@ -14,37 +14,52 @@ let grid = {
     this.height = r;
 
     this._grid = [];
-    for (var x = 0; x < c; x++) {
+    for (let x = 0; x < c; x++) {
       this._grid.push([]);
-      for (var y = 0; y < r; y++) {
+      for (let y = 0; y < r; y++) {
         this._grid[x].push(d);
       }
     }
   },
   set: function(val, x, y){
-
+    this._grid[x][y] = val;
   },
   get: function(x, y){
-
+    return this._grid[x][y];
   }
 }
 
 let snake = {
   direction: null,
+  last: null,
   _queue: null,
 
   init: function(d, x, y) {
+    this.direction = d;
 
+    this._queue = [];
+    this.insert(x, y);
   },
   insert: function(x, y) {
-
+    this._queue.unshift({x:x, y:y});
+    this.last = this._queue[0];
   },
   remove: function(){
-
+    return this._queue.pop();
   }
 }
 
 function setFood() {
+  let empty = [];
+  for (let x = 0; x < grid.width; x++) {
+    for (let y = 0; y < grid.height; y++) {
+      if (grid.get(x,y) === EMPTY) {
+        empty.push({x:x, y:y});
+      }
+    }
+  }
+  let randpos = empty[Math.foor(Math.random()*empthy.length)];
+  grid.set(FRUIT, randpos.x, randpos.y);
 
 }
 function main() {
