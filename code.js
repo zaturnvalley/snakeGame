@@ -61,13 +61,13 @@ function setFood() {
       }
     }
   }
-  let randpos = empty[Math.foor(Math.random()*empthy.length)];
+  let randpos = empty[Math.floor(Math.random()*empty.length)];
   grid.set(FRUIT, randpos.x, randpos.y);
 }
 var canvas, ctx, keystate, frames;
 
 function main() {
-  canvas = document.createElement("canvas");
+  canvas = document.createElement('canvas');
   canvas.width = COLS * 20;
   canvas.height = ROWS * 20;
   ctx = canvas.getContext("2d");
