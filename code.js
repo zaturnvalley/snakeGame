@@ -106,6 +106,11 @@ function loop() {
 function update() {
   frames++;
 
+  if (keystate[KEY_LEFT]) snake.direction = LEFT;
+  if (keystate[KEY_UP]) snake.direction = UP;
+  if (keystate[KEY_RIGHT]) snake.direction = RIGHT;
+  if (keystate[KEY_DOWN]) snake.direction = DOWN;
+
   if(frames%5 === 0) {
     var nx = snake.last.x;
     var ny = snake.last.y;
@@ -129,6 +134,10 @@ function update() {
       0 > ny || ny > grid.height - 1
     ) {
       return init();
+    }
+
+    if (grid.get(nx, ny) === FRUIT) {
+      setFood();
     }
 
     var tail = snake.remove();
