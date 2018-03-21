@@ -126,7 +126,7 @@ function update() {
         nx++;
         break;      
       case DOWN:
-        nx++;
+        ny++;
         break;      
     }
 
@@ -137,13 +137,15 @@ function update() {
     }
 
     if (grid.get(nx, ny) === FRUIT) {
+      var tail = {x:nx, y:ny}
       setFood();
+    } else {
+      var tail = snake.remove();
+      grid.set(EMPTY, tail.x, tail.y);
+      tail.x = nx;
+      tail.y = ny;
     }
 
-    var tail = snake.remove();
-    grid.set(EMPTY, tail.x, tail.y);
-    tail.x = nx;
-    tail.y = ny;
     grid.set(SNAKE, tail.x, tail.y);
 
     snake.insert(tail.x, tail.y);
