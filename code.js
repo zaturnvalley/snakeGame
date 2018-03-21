@@ -131,7 +131,8 @@ function update() {
     }
 
     if (0 > nx || nx > grid.width - 1 ||
-      0 > ny || ny > grid.height - 1
+      0 > ny || ny > grid.height - 1 || 
+      grid.get(nx, ny) === SNAKE
     ) {
       return init();
     }
