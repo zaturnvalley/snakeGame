@@ -7,6 +7,9 @@ let EMPTY = 0, SNAKE = 1, FRUIT = 2;
 // Directions
 var LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3;
 
+// Key Codes
+var KEY_LEFT = 37, KEY_UP = 38, KEY_RIGHT = 39, KEY_DOWN = 40;
+
 let grid = {
   width: null,
   height: null,
@@ -75,6 +78,13 @@ function main() {
 
   frames = 0;
   keystate = {};
+  document.addEventListener('keydown', function(evt){
+    keystate[evt.keyCode] = true;
+  });
+  document.addEventListener('keyup', function(evt){
+    delete keystate[evt.keyCode];
+  });
+
   init();
   loop();
 } 
@@ -113,6 +123,12 @@ function update() {
       case DOWN:
         nx++;
         break;      
+    }
+
+    if (0 > nx || nx > grid.width - 1 ||
+      0 > ny || ny > grid.height - 1
+    ) {
+      return init();
     }
 
     var tail = snake.remove();
