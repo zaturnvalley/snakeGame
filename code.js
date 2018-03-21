@@ -4,6 +4,9 @@ const COLS = 26, ROWS = 26;
 // IDs
 let EMPTY = 0, SNAKE = 1, FRUIT = 2;
 
+// Directions
+var LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3;
+
 let grid = {
   width: null,
   height: null,
@@ -60,22 +63,59 @@ function setFood() {
   }
   let randpos = empty[Math.foor(Math.random()*empthy.length)];
   grid.set(FRUIT, randpos.x, randpos.y);
-
 }
-function main() {
+var canvas, ctx, keystate, frames;
 
+function main() {
+  canvas = document.createElement("canvas");
+  canvas.width = COLS * 20;
+  canvas.height = ROWS * 20;
+  ctx = canvas.getContext("2d");
+  document.body.appendChild(canvas);
+
+  frames = 0;
+  keystate = {};
+  init();
+  loop();
 } 
 function init() {
+  grid.init(EMPTY, COLS, ROWS);
 
+  var sp = {x: Math.floor(COLS/2), y: ROWS - 1};
+  snake.init(UP, sp.x, sp.y);
+  grid.set(SNAKE, sp.x, sp.y);
+
+  setFood();
 }
 function loop() {
+  update();
+  draw();
 
+  window.requestAnimationFrame(loop, canvas);
 }
 function update() {
-
+  frames++;
 } 
 function draw() {
+  var tw = canvas.width/grid.width;
+  var th = canvas.height/grid.height;
 
+  for (let x = 0; x < grid.width; x++) {
+    for (let y = 0; y < grid.height; y++) {
+      switch (grid.get(x, y)) {
+        case EMPTY:
+          ctx.fillStyle = "#fff";
+          break;
+        case SNAKE:
+          ctx.fillStyle = "#0ff";        
+          break;
+        case FRUIT:
+          ctx.fillStyle = "#f00";        
+          break;
+      }
+      ctx.fillRect(x*tw, y*th, tw, th);
+    }
+  }
 }
 
 main();
