@@ -67,14 +67,17 @@ function setFood() {
   let randpos = empty[Math.floor(Math.random()*empty.length)];
   grid.set(FRUIT, randpos.x, randpos.y);
 }
-var canvas, ctx, keystate, frames;
+var canvas, ctx, keystate, frames, score;
 
 function main() {
   canvas = document.createElement('canvas');
   canvas.width = COLS * 20;
   canvas.height = ROWS * 20;
   ctx = canvas.getContext("2d");
-  document.body.appendChild(canvas);
+  var container = document.getElementById('container');
+  container.appendChild(canvas);
+
+  ctx.font = "12px Helvetica";
 
   frames = 0;
   keystate = {};
@@ -89,6 +92,7 @@ function main() {
   loop();
 } 
 function init() {
+  score = 0;
   grid.init(EMPTY, COLS, ROWS);
 
   var sp = {x: Math.floor(COLS/2), y: ROWS - 1};
@@ -106,10 +110,10 @@ function loop() {
 function update() {
   frames++;
 
-  if (keystate[KEY_LEFT]) snake.direction = LEFT;
-  if (keystate[KEY_UP]) snake.direction = UP;
-  if (keystate[KEY_RIGHT]) snake.direction = RIGHT;
-  if (keystate[KEY_DOWN]) snake.direction = DOWN;
+  if (keystate[KEY_LEFT] && snake.direction != RIGHT) snake.direction = LEFT;
+  if (keystate[KEY_UP] && snake.direction != DOWN) snake.direction = UP;
+  if (keystate[KEY_RIGHT] && snake.direction != LEFT) snake.direction = RIGHT;
+  if (keystate[KEY_DOWN] && snake.direction != UP) snake.direction = DOWN;
 
   if(frames%5 === 0) {
     var nx = snake.last.x;
@@ -138,6 +142,7 @@ function update() {
     }
 
     if (grid.get(nx, ny) === FRUIT) {
+      score++;
       var tail = {x:nx, y:ny}
       setFood();
     } else {
@@ -172,6 +177,8 @@ function draw() {
       ctx.fillRect(x*tw, y*th, tw, th);
     }
   }
+  ctx.fillStyle = "#000";
+  ctx.fillText("SCORE: " + score, 10, canvas.height - 10);
 }
 
 main();
