@@ -21,3 +21,41 @@ canvas {
   max-width: 100%;
   max-height: 100%;  
 }
+.buttonContainer {
+  display: none;
+}
+
+@media only screen 
+  and (min-device-width : 320px) 
+  and (max-device-width : 480px){ 
+    .buttonContainer {
+      display: inline;
+      text-align: center;
+    }
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  text-align: center;
+  color: #fff;
+  background-color: #000;
+  cursor: pointer;
+  display: inline-block;
+}
+.blankBox {
+  width: 30px;
+  height: 30px; 
+  display: inline-block;
+  border: 1px solid #000;
+}
+.button:active{
+  border: 1px solid black;  
+  color: #000;
+  background-color: #fff; 
+}
+.buttonRow {
+  display: inline-block;
+  width: 100%;
+}

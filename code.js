@@ -2,7 +2,7 @@
 const COLS = 26, ROWS = 26;
 
 // IDs
-let EMPTY = 0, SNAKE = 1, FRUIT = 2;
+let EMPTY = 0, SNAKE = 1, FRUIT = 2, HIGHSCORE = 0;
 
 // Directions
 var LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3;
@@ -87,7 +87,31 @@ function main() {
   document.addEventListener('keyup', function(evt){
     delete keystate[evt.keyCode];
   });
-
+  $('#leftMobile').bind('touchstart', function(evt){
+    keystate[KEY_LEFT] = true;
+  });
+  $('#leftMobile').bind('touchend', function(evt){
+    delete keystate[KEY_LEFT];
+  });
+  $('#rightMobile').bind('touchstart', function(evt){
+    keystate[KEY_RIGHT] = true;
+  });
+  $('#rightMobile').bind('touchend', function(evt){
+    delete keystate[KEY_RIGHT];
+  });
+  $('#upMobile').bind('touchstart', function(evt){
+    keystate[KEY_UP] = true;
+  });
+  $('#upMobile').bind('touchend', function(evt){
+    delete keystate[KEY_UP];
+  });
+  $('#downMobile').bind('touchstart', function(evt){
+    keystate[KEY_DOWN] = true;
+  });
+  $('#downMobile').bind('touchend', function(evt){
+    delete keystate[KEY_DOWN];
+  });      
+   
   init();
   loop();
 } 
