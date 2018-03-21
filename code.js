@@ -95,6 +95,34 @@ function loop() {
 }
 function update() {
   frames++;
+
+  if(frames%5 === 0) {
+    var nx = snake.last.x;
+    var ny = snake.last.y;
+
+    switch (snake.direction) {
+      case LEFT:
+        nx--;
+        break;
+      case UP:
+        ny--;
+        break;      
+      case RIGHT:
+        nx++;
+        break;      
+      case DOWN:
+        nx++;
+        break;      
+    }
+
+    var tail = snake.remove();
+    grid.set(EMPTY, tail.x, tail.y);
+    tail.x = nx;
+    tail.y = ny;
+    grid.set(SNAKE, tail.x, tail.y);
+
+    snake.insert(tail.x, tail.y);
+  }
 } 
 function draw() {
   var tw = canvas.width/grid.width;
