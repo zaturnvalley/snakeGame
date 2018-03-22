@@ -35,8 +35,8 @@ canvas {
 }
 
 .button {
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 45px;
   border: 1px solid white;
   text-align: center;
   color: #fff;
@@ -45,8 +45,8 @@ canvas {
   display: inline-block;
 }
 .blankBox {
-  width: 30px;
-  height: 30px; 
+  width: 45px;
+  height: 45px; 
   display: inline-block;
   border: 1px solid #000;
 }

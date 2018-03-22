@@ -71,8 +71,8 @@ var canvas, ctx, keystate, frames, score;
 
 function main() {
   canvas = document.createElement('canvas');
-  canvas.width = COLS * 20;
-  canvas.height = ROWS * 20;
+  canvas.width = COLS * 18;
+  canvas.height = ROWS * 18;
   ctx = canvas.getContext("2d");
   var container = document.getElementById('container');
   container.appendChild(canvas);
@@ -199,7 +199,7 @@ function draw() {
           ctx.fillStyle = "#fff";
           break;
         case SNAKE:
-          ctx.fillStyle = "#0ff";        
+          ctx.fillStyle = "#000";        
           break;
         case FRUIT:
           ctx.fillStyle = "#f00";        
