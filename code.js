@@ -77,6 +77,9 @@ function main() {
   var container = document.getElementById('container');
   container.appendChild(canvas);
 
+  var titleSection = document.getElementsByClassName('titleSection');
+
+
   ctx.font = "12px Helvetica";
 
   frames = 0;
@@ -167,6 +170,10 @@ function update() {
 
     if (grid.get(nx, ny) === FRUIT) {
       score++;
+      if(score > HIGHSCORE){
+        HIGHSCORE = score;
+        $('#scoreText').text("High Score: " + HIGHSCORE);
+      }
       var tail = {x:nx, y:ny}
       setFood();
     } else {
